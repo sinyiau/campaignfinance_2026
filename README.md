@@ -1,0 +1,1 @@
+receipts includes candidate self-loans which distort comparisons. This analysis uses individual_contributions as the fundraising metric, which better reflects genuine voter support.
