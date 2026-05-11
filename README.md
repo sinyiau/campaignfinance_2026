@@ -70,7 +70,7 @@ git clone https://github.com/sinyiau/campaignfinance_2026
 cd campaignfinance_2026
 pip install requests pandas
 
-python 01_fetch_candidates.py       # Fetch all 532 Senate candidates from FEC API
+python 01_fetch_candidates.py       # Fetch all Senate candidates from FEC API
 python 02_fetch_financials.py       # Fetch financial totals for each candidate (~20 min)
 python 03_merge_ratings.py          # Merge Cook ratings, filter competitive states
 python 04_analysis.py               # Build race-level comparisons and dumbbell data
