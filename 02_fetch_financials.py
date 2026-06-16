@@ -13,7 +13,11 @@ def get_candidate_financials(candidate_id):
     params   = {"api_key": API_KEY, "cycle": 2026}
 
     response = requests.get(endpoint, params=params)
-    data     = response.json()
+
+    if not response.text.strip():
+        return None
+
+    data = response.json()
 
     if not data["results"]:
         return None
@@ -41,7 +45,7 @@ for i, cid in enumerate(all_candidates["candidate_id"]):
     if i % 10 == 0:
         print(f"{i}/{total} done...")
 
-    time.sleep(0.2) 
+    time.sleep(0.5)
 
 financials_df = pd.DataFrame(financials)
 financials_df.to_csv("data/processed/all_senate_financials.csv", index=False)

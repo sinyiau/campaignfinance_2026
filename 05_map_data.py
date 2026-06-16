@@ -7,10 +7,12 @@ df = pd.read_csv("data/processed/all_senate_financials.csv")
 candidates = pd.read_csv("data/raw/all_senate_candidates.csv")
 
 merged = df.merge(
-    candidates[["candidate_id", "name", "state", "party"]],
+    candidates[["candidate_id", "name", "state", "party", "candidate_status"]],
     on="candidate_id",
     how="left"
 )
+
+merged = merged[merged["candidate_status"] == "C"]
 
 state_totals = (
     merged[merged["party"].isin(["DEM", "REP"])]
@@ -43,6 +45,24 @@ state_names = {
 }
 
 state_totals["state_name"] = state_totals["state"].map(state_names)
+
+all_states = list(state_names.keys())
+existing_states = state_totals["state"].tolist()
+missing_states = [s for s in all_states if s not in existing_states]
+
+missing_df = pd.DataFrame({
+    "state": missing_states,
+    "DEM": 0,
+    "REP": 0,
+    "leader": "N/A",
+    "leader_name": "N/A",
+    "gap_abs": 0,
+    "gap_label": "No Senate election in 2026",
+    "dem_share": None,
+})
+missing_df["state_name"] = missing_df["state"].map(state_names)
+
+state_totals = pd.concat([state_totals, missing_df], ignore_index=True)
 
 state_totals.to_csv("data/processed/state_fundraising_map.csv", index=False)
 print(state_totals.sort_values("dem_share", ascending=False))
