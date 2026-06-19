@@ -5,14 +5,12 @@ A data journalism project analysing individual campaign contributions to US Sena
 ## 1. The Story
 Democratic Senate candidates are outraising their Republican rivals in most states holding 2026 elections, including states they are unlikely to win, according to Cook ratings. 
 
-In Texas, Democratic candidate James Talarico raised $40m in individual contributions against Republican Warren Paxton's $7m. The pattern repeats across Florida, Ohio, Georgia and North Carolina.
-
 But fundraising advantage does not always translate into electoral advantage. This project maps the money, identifies where the gaps are the largest and sets them against the Cook Senate ratings to ask: does raising more money actually predict winning?
 
 ## 2. Visualizations
 [Senate fundraising map for all states holding elections in 2026](https://public.flourish.studio/visualisation/28904950/): Share of individual donations going to Democrats and Republicans, by state. The deeper the colour, the greater the share of individual donations going to that party.
 
-[Dumbbell chart for competitive races](https://public.flourish.studio/visualisation/28912758/): Individuals contributions to the leading Democrat and Republican candidate in eight competitive Senate races.
+[Dumbbell chart for competitive races](https://public.flourish.studio/visualisation/28912758/): Individuals contributions to the Democrat and Republican candidates in eight competitive Senate races.
 
 ## 3. Project Sturcture
 ```
@@ -45,15 +43,15 @@ campaignfinance_2026/
 
 ## 5. Methodology
 ### Candidate selection
-All Senate candidates registered with the FEC for the 2026 election cycle were retrieved via the OpenFEC API: 535 in total as of May 10. Of these, 286 had filed financial reports. The remaining had registered to run but had not yet disclosed any financial activity.
+All Senate candidates registered with the FEC for the 2026 election cycle were retrieved via the OpenFEC API.
 
-For the dumbbell chart, eight states were selected based on the Cook Political Report's competitive race ratings: Florida, Georgia, Iowa, Maine, Montana, North Carolina, Ohio and Texas. Within each state, the candidate with the highest individual contributions was selected to represent each party.
+For the dumbbell chart, eight states were selected based on the Cook Political Report's competitive race ratings: Florida, Georgia, Iowa, Maine, Montana, North Carolina, Ohio and Texas. 
 
 ### Fundraising metric
 `individual_contributions` was used as the primary fundraising metric rather than `receipts`. Total receipts include candidate self-loans, which distort cross-candidate comparisons: a candidate lending $50m to their own campaign is not the same signal as raising $50m from individual donors. Individual contributions better reflect genuine voter financial support.
 
 ### State-level map
-For the map, individual contributions were summed by state and party across all candidates with financial filings. The metric displayed is `dem_share` — the Democratic share of total individual contributions:
+For the map, individual contributions were summed by state and party across all active candidates with financial filings. The metric displayed is `dem_share` — the Democratic share of total individual contributions:
 ```
 dem_share = DEM / (DEM + REP)
 ```
@@ -61,7 +59,6 @@ A value of 0.5 represents an equal split. Values above 0.5 indicate Democrats ra
 
 ## 6. Limitations
 - Fundraising totals will change substantially as the election approaches, particularly after the Q2 2026 filing deadline in July.
-- The dumbbell chart shows only the highest-fundraising candidate per party per state. In states with crowded primaries, other candidates may have significant fundraising activity not reflected here.
 - This analysis describes the money landscape. It does not model electoral outcomes. Cook Political Report ratings are included as context, not as a prediction.
 
 ## 7. Reproduce this Analysis
@@ -82,4 +79,4 @@ Free FEC API keys available at https://api.open.fec.gov/developers/. Scripts run
 Sinyi Au  
 Portfolio: https://sinyiau.github.io/2026Portfolio/  
 GitHub: https://github.com/sinyiau  
-Built May 2026. 
+Built June 2026. 
